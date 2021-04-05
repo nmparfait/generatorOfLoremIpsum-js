@@ -19,10 +19,21 @@ const result = document.querySelector('.lorem-text');
 form.addEventListener('submit', function (e) {
   e.preventDefault();
   //all the input return the string
+  //map will return the elements of the array
+  //slice give the number asked between an interval
   const value = parseInt(amount.value);
+  const random = Math.floor(Math.random() * text.length);
 
-  if (isNaN(value) || value < 0 || value > 9) {
+  if (isNaN(value) || value <= 0 || value > 9) {
     result.innerHTML = `<p class="result">${text[0]}</p>`;
+  } else {
+    let tempText = text.slice(0, value);
+    tempText = tempText
+      .map(function (item) {
+        return `<p class="result">${item}</p>`;
+      })
+      .join('');
+    result.innerHTML = tempText;
   }
 
   //empty value
